@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+</head>
+<body>        
+    <!-- form Section -->
+    <section>
+        <h2 >Contact Us</h2>
+        <p class="form__description">We're here to help you!</p>
+
+        <!-- UPDATED FORM: Add target attribute -->
+        <form id="contactForm" action="sendmail.php" method="POST" target="dummyframe" autocomplete="off">
+            <div class="form__group">
+                <label for="contactName">Name</label>
+                <input type="text" id="contactName" name="contactName" required>
+            </div>
+            <div class="form__group">
+                <label for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" name="contactEmail" required>
+            </div>
+            <div class="form__group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form__group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <div style="display:none;">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" autocomplete="off">
+            </div>
+            <button type="submit">Send</button>
+            <div class="form__message" id="formMessage"></div>
+        </form>
+        <!-- ADD THIS HIDDEN IFRAME just after the form -->
+        <iframe name="dummyframe" id="dummyframe" style="display:none;"></iframe>
+    </section>
+
+    
+    <script>
+        function displayFormMessage(success, message) {
+            var msg = message || (success 
+                ? "Message sent! If you do not receive a reply in 24 hours, please email us directly." 
+                : "There was a problem sending your message. Please try again.");
+
+            var formMessage = document.getElementById('formMessage');
+            formMessage.textContent = msg;
+            formMessage.style.color = success ? "green" : "#E43";
+
+            if (success) {
+                document.getElementById('contactForm').reset();
+            }
+
+            setTimeout(() => { formMessage.textContent = ''; }, 7000);
+        }
+
+        
+    </script>     
+  
+</body>
+</html>
+
+
+
